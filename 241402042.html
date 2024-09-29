@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+
+</head>
+
+<body>
+    <form name="kaldiskon">
+        <table>
+
+            <tr>
+                <td>Rp.</td>
+                <td colspan="10"><input type="number" name="nominal" required placeholder="Nominal isi pulsa"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input type="radio" id="telkomsel" name="Pulsa" value="telkomsel"><label
+                        for="telkomsel">Telkomsel</label></td>
+                <td><input type="radio" id="indosat" name="Pulsa" value="indosat"><label for="indosat">Indosat</label>
+                </td>
+                <td><input type="radio" id="XL" name="Pulsa" value="XL"><label for="XL">XL</label></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><button type="button" onclick="proses()">Biaya</button></td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+        function proses() {
+            const pulsa = parseInt(document.kaldiskon.nominal.value);
+            const provider = document.querySelector('input[name=Pulsa]:checked').value;
+
+            let diskon = 0;
+            switch (provider) {
+                case "telkomsel":
+                    diskon = 0.10
+                    break;
+                case "XL":
+                    diskon = 0.02
+                    break;
+                case "indosat":
+                    diskon = 0.05
+                    break;
+                default:
+                    alert("Provider yang anda pilih invalid");
+                    return;
+            }
+
+            let hasilbayar = pulsa - (pulsa * diskon)
+
+            hasilbayar = hasilbayar.toLocaleString("id-ID")
+
+            alert("Diskon " + (diskon * 100) + "% untuk provider " + provider + " adalah Rp." + hasilbayar);
+
+            window.location.reload();
+        }
+    </script>
+</body>
+
+</html>
